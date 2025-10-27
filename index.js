@@ -29,10 +29,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // MySQL connection
 const db = await mysql.createConnection({
-    host: 'localhost',
+    host: process.env.DB_HOST ||'localhost',
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || 'ruch004',
-    database: process.env.DB_NAME || 'FMS' // your database name
+    database: process.env.DB_NAME || 'FMS', // your database name
+    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 3306
 });
 
 console.log('✅ Connected to MySQL database');
